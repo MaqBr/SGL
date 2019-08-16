@@ -1,0 +1,131 @@
+﻿@model IEnumerable<SGL.ApplicationCore.Entity.Livro>
+
+@{
+    ViewData["Title"] = "Livros";
+}
+
+<h2>@ViewBag.Title</h2>
+<p>
+    <a class="btn btn-primary" id="btnAdicionar"
+       href="@Url.Action("Create", "Livro")">
+        <i class="glyphicon glyphicon-new-window"></i> Novo Registro
+    </a>
+</p>
+
+<div id="divFiltro" class="panel panel-default">
+
+    <div class="panel-heading">
+        <h2 class="panel-title">Filtrar</h2>
+    </div>
+
+
+    <form asp-action="Buscar">
+        <div class="panel-body">
+            <div class="form-horizontal">
+
+                <div class="form-group">
+                    <label for="criterio" class="control-label col-md-2">Critério(s)</label>
+                    <div class="col-md-10">
+                        <input type="text"
+                               name="criterio"
+                               id="criterio"
+                               placeholder="Entre com o título do livro ou nome do autor" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+
+                        <span id="divLoading" style="display: none">
+                            <img src="~/Content/loading.gif" />
+                        </span>
+
+                        <input type="submit"
+                               value="Buscar"
+                               class="btn btn-primary" />
+
+                        <button type="submit" id="btnMostrarTodos"
+                                class="btn btn-primary">
+                            Mostrar todos
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genero.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataPublicacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paginas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Autor.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Editora.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sinopse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capa)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genero.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataPublicacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Paginas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Autor.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Editora.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sinopse)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capa)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.LivroId">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.LivroId">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.LivroId">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
